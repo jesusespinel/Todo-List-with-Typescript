@@ -2,20 +2,38 @@ import { useState } from 'react'
 import { Todos } from './components/Todos'
 const mockTodos = [
   {
+    id: '1',
+    title: 'Aprender React con Typescript',
+    completed: false
+  },
+  {
     id: '2',
-    title: 'todo2',
+    title: 'Aprender y dominar CSS',
     completed: false
   },
   {
     id: '3',
-    title: 'todo 3',
-    completed: false
+    title: 'Meditar',
+    completed: true
   }
 ]
+
 const App = (): JSX.Element => {
-  const [todos] = useState(mockTodos)
+  const [todos, setTodos] = useState(mockTodos)
+
+  const handleRemove = (id: string): void => {
+    const newTodos = todos.filter(todo => todo.id !== id)
+    setTodos(newTodos)
+  }
+
   return (
-  <Todos todos={todos} />
+    <div className='todoapp'>
+   <Todos
+   todos={todos}
+   onRemove={handleRemove}
+   />
+    </div>
+
   )
 }
 export default App
